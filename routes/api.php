@@ -13,6 +13,11 @@ use Illuminate\Http\Request;
 |
 */
 
+Route::get('/' , function(){
+
+    return ['message' => 'Welcome to UN BHUTAN e-Pass API'];
+});
+
 Route::resource('/agency' , 'AgencyController');
 
 Route::resource('/car' , 'CarController');
