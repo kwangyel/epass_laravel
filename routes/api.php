@@ -13,6 +13,17 @@ use Illuminate\Http\Request;
 |
 */
 
+Route::resource('/agency' , 'AgencyController');
+
+Route::resource('/car' , 'CarController');
+
+Route::resource('/staff' , 'StaffController');
+
+Route::resource('/visitor' , 'VisitorController');
+
+Route::resource('/check' , 'CheckController');
+
+
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
