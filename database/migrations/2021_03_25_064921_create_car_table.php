@@ -15,6 +15,7 @@ class CreateCarTable extends Migration
     {
         Schema::create('car', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('vnumber');
             $table->integer('agency_id')->unsigned()->nullable();
             $table->foreign('agency_id')->references('id')->on('agency')->onDelete('restrict');
             $table->string('status')->default('check-out');
