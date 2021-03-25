@@ -1,0 +1,40 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+class CreateVisitorTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('visitor', function (Blueprint $table) {
+                $table->increments('id');
+                $table->integer('staff_id')->unsigned()->nullable();
+                $table->foreign('staff_id')->references('id')->on('staff')->onDelete('restrict');
+                $table->string('agency');
+                $table->string('name');
+                $table->string('cid');
+                $table->string('address');
+                $table->string('contact');
+                $table->string('status')->default('check-in');
+                $table->timestamps();
+           
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('visitor');
+    }
+}
