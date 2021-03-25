@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Staff;
 use Illuminate\Http\Request;
 
 class StaffController extends Controller
@@ -13,7 +14,8 @@ class StaffController extends Controller
      */
     public function index()
     {
-        //
+        $staff = Staff::all();
+        return $staff;
     }
 
     /**
@@ -24,7 +26,8 @@ class StaffController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $staff = Staff::create($request->all);
+        return $staff;
     }
 
     /**
@@ -35,7 +38,9 @@ class StaffController extends Controller
      */
     public function show($id)
     {
-        //
+        $staff = Staff::find($id);
+
+        return $staff;
     }
 
     /**
@@ -47,7 +52,10 @@ class StaffController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $staff = Staff::find($id);
+        $staff->update($request->all());
+
+        return $staff;
     }
 
     /**
@@ -58,6 +66,7 @@ class StaffController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $staff = Staff::destroy($id);
+        return $staff;
     }
 }
