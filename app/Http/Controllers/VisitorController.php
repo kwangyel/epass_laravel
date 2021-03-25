@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Visitor;
 use Illuminate\Http\Request;
 
 class VisitorController extends Controller
@@ -13,7 +14,8 @@ class VisitorController extends Controller
      */
     public function index()
     {
-        //
+        $visitor = Visitor::all();
+        return $visitor;
     }
 
     /**
@@ -24,7 +26,8 @@ class VisitorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $visitor = Visitor::create($request->all);
+        return $visitor;
     }
 
     /**
@@ -35,7 +38,9 @@ class VisitorController extends Controller
      */
     public function show($id)
     {
-        //
+        $visitor = Visitor::find($id);
+
+        return $visitor;
     }
 
     /**
@@ -47,7 +52,10 @@ class VisitorController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $visitor = Visitor::find($id);
+        $visitor->update($request->all());
+
+        return $visitor;
     }
 
     /**
@@ -58,6 +66,8 @@ class VisitorController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $visitor = Visitor::destroy($id);
+        return $visitor;
     }
 }
+

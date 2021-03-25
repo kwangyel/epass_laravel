@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Agency;
 
 class AgencyController extends Controller
 {
@@ -13,7 +14,8 @@ class AgencyController extends Controller
      */
     public function index()
     {
-        //
+        $agency = Agency::all();
+        return $agency;
     }
 
     /**
@@ -24,7 +26,8 @@ class AgencyController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $agency = Agency::create($request->all);
+        return $agency;
     }
 
     /**
@@ -35,7 +38,9 @@ class AgencyController extends Controller
      */
     public function show($id)
     {
-        //
+        $agency = Agency::find($id);
+
+        return $agency;
     }
 
     /**
@@ -47,7 +52,10 @@ class AgencyController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $agency = Agency::find($id);
+        $agency->update($request->all());
+
+        return $agency;
     }
 
     /**
@@ -58,6 +66,7 @@ class AgencyController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $agency = Agency::destroy($id);
+        return $agency;
     }
 }

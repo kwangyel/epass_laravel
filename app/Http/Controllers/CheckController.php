@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Check;
 use Illuminate\Http\Request;
 
 class CheckController extends Controller
@@ -13,7 +14,8 @@ class CheckController extends Controller
      */
     public function index()
     {
-        //
+        $check = Check::all();
+        return $check;
     }
 
     /**
@@ -24,7 +26,8 @@ class CheckController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $check = Check::create($request->all);
+        return $check;
     }
 
     /**
@@ -35,7 +38,9 @@ class CheckController extends Controller
      */
     public function show($id)
     {
-        //
+        $check = Check::find($id);
+
+        return $check;
     }
 
     /**
@@ -47,7 +52,10 @@ class CheckController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $check = Check::find($id);
+        $check->update($request->all());
+
+        return $check;
     }
 
     /**
@@ -58,6 +66,7 @@ class CheckController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $check = Check::destroy($id);
+        return $check;
     }
 }
