@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Visitor;
 use Illuminate\Http\Request;
+use App\Http\Resources\VisitorResource;
+use Carbon\Carbon;
 
 class VisitorController extends Controller
 {
@@ -14,8 +16,9 @@ class VisitorController extends Controller
      */
     public function index()
     {
-        $visitor = Visitor::all();
-        return $visitor;
+        $visitor = Visitor::with('staff')->get();
+
+        return response([ 'data' => VisitorResource::collection($visitor), 'success' => 'true'], 200);
     }
 
     /**
@@ -27,7 +30,7 @@ class VisitorController extends Controller
     public function store(Request $request)
     {
         $visitor = Visitor::create($request->all);
-        return $visitor;
+        return response([ 'data' => VisitorResource::collection($visitor), 'success' => 'true'], 200);
     }
 
     /**
@@ -36,11 +39,11 @@ class VisitorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($agency)
     {
-        $visitor = Visitor::find($id);
+        $visitor = Visitor::all()->where('agency', $agency );
 
-        return $visitor;
+        return response([ 'data' => VisitorResource::collection($visitor), 'success' => 'true'], 200);
     }
 
     /**
@@ -55,7 +58,7 @@ class VisitorController extends Controller
         $visitor = Visitor::find($id);
         $visitor->update($request->all());
 
-        return $visitor;
+        return response([ 'data' => VisitorResource::collection($visitor), 'success' => 'true'], 200);
     }
 
     /**
@@ -67,7 +70,15 @@ class VisitorController extends Controller
     public function destroy($id)
     {
         $visitor = Visitor::destroy($id);
-        return $visitor;
+        return response([ 'data' => VisitorResource::collection($visitor), 'success' => 'true'], 200);
     }
+
+    public function showbydate()
+    {
+        $visitor = Visitor::whereDate('arrivedtime', Carbon::today())->get();
+
+        return response([ 'data' => VisitorResource::collection($visitor), 'success' => 'true'], 200);
+    }
+
 }
 

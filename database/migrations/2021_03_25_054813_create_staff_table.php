@@ -13,13 +13,13 @@ class CreateStaffTable extends Migration
      */
     public function up()
     {
-        Schema::create('staff', function (Blueprint $table) {
+        Schema::create('staffs', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->string('cid');
             $table->string('role')->default('staff');
             $table->integer('agency_id')->unsigned()->nullable();
-            $table->foreign('agency_id')->references('id')->on('agency')->onDelete('restrict');
+            $table->foreign('agency_id')->references('id')->on('agencies')->onDelete('restrict');
             $table->string('contact');
             $table->string('status')->default('check-in');
             $table->timestamps();

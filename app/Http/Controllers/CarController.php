@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Car;
+use App\Http\Resources\CarResource;
 use Illuminate\Http\Request;
 
 class CarController extends Controller
@@ -14,8 +15,8 @@ class CarController extends Controller
      */
     public function index()
     {
-        $car = Car::all();
-        return $car;
+        $car = Car::with('agency')->get();
+        return response([ 'data' => CarResource::collection($car), 'success' => 'true'], 200);
     }
 
     /**
@@ -27,7 +28,7 @@ class CarController extends Controller
     public function store(Request $request)
     {
         $car = Car::create($request->all);
-        return $car;
+        return response([ 'data' => CarResource::collection($car), 'success' => 'true'], 200);
     }
 
     /**
@@ -40,7 +41,7 @@ class CarController extends Controller
     {
         $car = Car::find($id);
 
-        return $car;
+        return response([ 'data' => CarResource::collection($car), 'success' => 'true'], 200);
     }
 
     /**
@@ -55,7 +56,7 @@ class CarController extends Controller
         $car = Car::find($id);
         $car->update($request->all());
 
-        return $car;
+        return response([ 'data' => CarResource::collection($car), 'success' => 'true'], 200);
     }
 
     /**
@@ -67,6 +68,6 @@ class CarController extends Controller
     public function destroy($id)
     {
         $car = Car::destroy($id);
-        return $car;
+        return response([ 'data' => CarResource::collection($car), 'success' => 'true'], 200);
     }
 }
