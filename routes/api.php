@@ -13,30 +13,32 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::group(['middleware' => ['cors', 'json.response']], function () {
+Route::get('/' , function(){
 
+    return ['message' => 'Welcome to UN BHUTAN e-Pass API'];
+});
 
-    Route::get('/' , function(){
+Route::get('/protected' , function(){
+    return ['message' => 'this is a protected message'];
 
-        return ['message' => 'Welcome to UN BHUTAN e-Pass API'];
-    });
+})->middleware('auth:api');
 
-    Route::resource('/agency' , 'AgencyController');
+Route::post('/create','AuthController@create');
 
-    Route::get('/api/staff', 'StaffController@agency');
+Route::post('/login','AuthController@login');
 
-    Route::resource('/car' , 'CarController');
+Route::resource('/agency' , 'AgencyController');
 
-    Route::resource('/staff' , 'StaffController');
+Route::resource('/car' , 'CarController');
 
-    Route::resource('/visitor' , 'VisitorController');
+Route::resource('/staff' , 'StaffController');
 
-    Route::get('/visitorbydate' , 'VisitorController@showbydate');
+Route::resource('/visitor' , 'VisitorController');
 
-    Route::resource('/check' , 'CheckController');
+Route::get('/visitorbydate' , 'VisitorController@showbydate');
 
+Route::resource('/check' , 'CheckController');
 
-    Route::middleware('auth:api')->get('/user', function (Request $request) {
-        return $request->user();
-    });
+Route::middleware('auth:api')->get('/user', function (Request $request) {
+    return $request->user();
 });
