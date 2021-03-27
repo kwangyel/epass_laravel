@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Check;
+use App\Http\Resources\CheckResource;
 use Illuminate\Http\Request;
 
 class CheckController extends Controller
@@ -14,8 +15,9 @@ class CheckController extends Controller
      */
     public function index()
     {
-        $check = Check::all();
-        return $check;
+        $check = Check::with('staff','car', 'visitor', 'staffs')->get();
+
+        return response([ 'data' => CheckResource::collection($check), 'success' => 'true'], 200);
     }
 
     /**
@@ -27,7 +29,7 @@ class CheckController extends Controller
     public function store(Request $request)
     {
         $check = Check::create($request->all);
-        return $check;
+        return response([ 'data' => CheckResource::collection($check), 'success' => 'true'], 200);
     }
 
     /**
@@ -40,7 +42,7 @@ class CheckController extends Controller
     {
         $check = Check::find($id);
 
-        return $check;
+        return response([ 'data' => CheckResource::collection($check), 'success' => 'true'], 200);
     }
 
     /**
@@ -55,7 +57,7 @@ class CheckController extends Controller
         $check = Check::find($id);
         $check->update($request->all());
 
-        return $check;
+        return response([ 'data' => CheckResource::collection($check), 'success' => 'true'], 200);
     }
 
     /**
@@ -67,6 +69,6 @@ class CheckController extends Controller
     public function destroy($id)
     {
         $check = Check::destroy($id);
-        return $check;
+        return response([ 'data' => CheckResource::collection($check), 'success' => 'true'], 200);
     }
 }

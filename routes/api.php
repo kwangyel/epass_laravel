@@ -1,3 +1,6 @@
+
+
+
 <?php
 
 use Illuminate\Http\Request;
@@ -32,6 +35,8 @@ Route::resource('/car' , 'CarController');
 Route::resource('/staff' , 'StaffController');
 
 Route::resource('/visitor' , 'VisitorController');
+
+Route::get('/visitorbydate' , 'VisitorController@showbydate');
 
 Route::resource('/check' , 'CheckController');
 

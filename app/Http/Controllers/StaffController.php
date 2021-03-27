@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\StaffResource;
 use App\Staff;
 use Illuminate\Http\Request;
+use App\Agency;
+use App\General;
 
 class StaffController extends Controller
 {
@@ -15,7 +18,7 @@ class StaffController extends Controller
     public function index()
     {
         $staff = Staff::all();
-        return $staff;
+        return response([ 'data' => StaffResource::collection($staff), 'success' => 'true'], 200);
     }
 
     /**
@@ -27,7 +30,7 @@ class StaffController extends Controller
     public function store(Request $request)
     {
         $staff = Staff::create($request->all);
-        return $staff;
+        return response([ 'data' => StaffResource::collection($staff), 'success' => 'true'], 200);
     }
 
     /**
@@ -36,11 +39,10 @@ class StaffController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($agency_id)
     {
-        $staff = Staff::find($id);
-
-        return $staff;
+        $staff = Staff::all()->where('agency_id', $agency_id);
+        return response([ 'data' => StaffResource::collection($staff), 'success' => 'true'], 200);
     }
 
     /**
@@ -55,7 +57,7 @@ class StaffController extends Controller
         $staff = Staff::find($id);
         $staff->update($request->all());
 
-        return $staff;
+        return response([ 'data' => StaffResource::collection($staff), 'success' => 'true'], 200);
     }
 
     /**
@@ -67,6 +69,13 @@ class StaffController extends Controller
     public function destroy($id)
     {
         $staff = Staff::destroy($id);
-        return $staff;
+        return response([ 'data' => StaffResource::collection($staff), 'success' => 'true'], 200);
+    }
+
+
+    public function agency(Staff $agency_id)
+    {
+        $staff = Staff::all()->where('agency_id', $agency_id);
+        return response([ 'data' => StaffResource::collection($staff), 'success' => 'true'], 200);
     }
 }

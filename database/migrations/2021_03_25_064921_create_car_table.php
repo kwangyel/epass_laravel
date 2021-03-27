@@ -13,11 +13,11 @@ class CreateCarTable extends Migration
      */
     public function up()
     {
-        Schema::create('car', function (Blueprint $table) {
+        Schema::create('cars', function (Blueprint $table) {
             $table->increments('id');
             $table->string('vnumber');
             $table->integer('agency_id')->unsigned()->nullable();
-            $table->foreign('agency_id')->references('id')->on('agency')->onDelete('restrict');
+            $table->foreign('agency_id')->references('id')->on('agencies')->onDelete('restrict');
             $table->string('status')->default('check-out');
             $table->timestamps();
         });
@@ -30,6 +30,6 @@ class CreateCarTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('car');
+        Schema::dropIfExists('cars');
     }
 }

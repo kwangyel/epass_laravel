@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Agency;
+use App\Http\Resources\AgencyResource;
 
 class AgencyController extends Controller
 {
@@ -15,7 +16,7 @@ class AgencyController extends Controller
     public function index()
     {
         $agency = Agency::all();
-        return $agency;
+        return response([ 'data' => AgencyResource::collection($agency), 'success' => 'true'], 200);
     }
 
     /**
@@ -26,8 +27,8 @@ class AgencyController extends Controller
      */
     public function store(Request $request)
     {
-        $agency = Agency::create($request->all);
-        return $agency;
+        $agency = Agency::create($request->all());
+        return response([ 'data' => AgencyResource::collection($agency), 'success' => 'true'], 200);
     }
 
     /**
@@ -40,7 +41,7 @@ class AgencyController extends Controller
     {
         $agency = Agency::find($id);
 
-        return $agency;
+        return response([ 'data' => AgencyResource::collection($agency), 'success' => 'true'], 200);
     }
 
     /**
@@ -55,7 +56,7 @@ class AgencyController extends Controller
         $agency = Agency::find($id);
         $agency->update($request->all());
 
-        return $agency;
+        return response([ 'data' => AgencyResource::collection($agency), 'success' => 'true'], 200);
     }
 
     /**
@@ -67,6 +68,6 @@ class AgencyController extends Controller
     public function destroy($id)
     {
         $agency = Agency::destroy($id);
-        return $agency;
+        return response([ 'data' => AgencyResource::collection($agency), 'success' => 'true'], 200);
     }
 }

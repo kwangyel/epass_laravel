@@ -13,16 +13,18 @@ class CreateVisitorTable extends Migration
      */
     public function up()
     {
-        Schema::create('visitor', function (Blueprint $table) {
+        Schema::create('visitors', function (Blueprint $table) {
                 $table->increments('id');
+                $table->dateTime('requesttime');
                 $table->integer('staff_id')->unsigned()->nullable();
                 $table->foreign('staff_id')->references('id')->on('staff')->onDelete('restrict');
-                $table->string('agency');
                 $table->string('name');
+                $table->string('agency');
                 $table->string('cid');
                 $table->string('address');
                 $table->string('contact');
                 $table->string('status')->default('check-in');
+                $table->dateTime('arrivedtime');
                 $table->timestamps();
            
         });
@@ -35,6 +37,6 @@ class CreateVisitorTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('visitor');
+        Schema::dropIfExists('visitors');
     }
 }
