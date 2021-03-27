@@ -1,3 +1,6 @@
+
+
+
 <?php
 
 use Illuminate\Http\Request;
@@ -20,11 +23,9 @@ Route::get('/' , function(){
 
 Route::get('/protected' , function(){
     return ['message' => 'this is a protected message'];
-
 })->middleware('auth:api');
 
 Route::post('/create','AuthController@create');
-
 Route::post('/login','AuthController@login');
 
 Route::resource('/agency' , 'AgencyController');
