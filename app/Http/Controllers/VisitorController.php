@@ -29,8 +29,8 @@ class VisitorController extends Controller
      */
     public function store(Request $request)
     {
-        $visitor = Visitor::create($request->all);
-        return response([ 'data' => VisitorResource::collection($visitor), 'success' => 'true'], 200);
+        $visitor = Visitor::create($request->all());
+        return  $visitor;
     }
 
     /**
@@ -53,12 +53,13 @@ class VisitorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
+        $id = $request->get('visitor_id');
         $visitor = Visitor::find($id);
-        $visitor->update($request->all());
-
-        return response([ 'data' => VisitorResource::collection($visitor), 'success' => 'true'], 200);
+        $update = $request->get('status','checked-out');
+        $visitor->update($update);
+        return $visitor;
     }
 
     /**

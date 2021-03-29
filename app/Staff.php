@@ -13,4 +13,9 @@ class Staff extends Model
         
         return 'agency_id';
     }
+
+    public function agency(){
+
+        return $this->belongsTo(Agency::class);
+    }
 }

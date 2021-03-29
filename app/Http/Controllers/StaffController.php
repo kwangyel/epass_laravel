@@ -17,7 +17,7 @@ class StaffController extends Controller
      */
     public function index()
     {
-        $staff = Staff::all();
+        $staff = Staff::with('agency')->get();
         return response([ 'data' => StaffResource::collection($staff), 'success' => 'true'], 200);
     }
 
@@ -29,8 +29,8 @@ class StaffController extends Controller
      */
     public function store(Request $request)
     {
-        $staff = Staff::create($request->all);
-        return response([ 'data' => StaffResource::collection($staff), 'success' => 'true'], 200);
+        $staff = Staff::create($request->all());
+        return  $staff;
     }
 
     /**
@@ -55,9 +55,9 @@ class StaffController extends Controller
     public function update(Request $request, $id)
     {
         $staff = Staff::find($id);
-        $staff->update($request->all());
-
-        return response([ 'data' => StaffResource::collection($staff), 'success' => 'true'], 200);
+        $data = $request->all();
+        $staff->update($data);
+        return response()->json($staff,200);
     }
 
     /**
@@ -69,7 +69,7 @@ class StaffController extends Controller
     public function destroy($id)
     {
         $staff = Staff::destroy($id);
-        return response([ 'data' => StaffResource::collection($staff), 'success' => 'true'], 200);
+        return $staff;
     }
 
 
@@ -78,4 +78,13 @@ class StaffController extends Controller
         $staff = Staff::all()->where('agency_id', $agency_id);
         return response([ 'data' => StaffResource::collection($staff), 'success' => 'true'], 200);
     }
+
+    
+    public function showbyrole()
+    {
+        $staff = Staff::all()->where('role', 'driver');
+
+        return response([ 'data' => StaffResource::collection($staff), 'success' => 'true'], 200);
+    }
+
 }
