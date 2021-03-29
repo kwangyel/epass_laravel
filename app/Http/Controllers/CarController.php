@@ -27,7 +27,7 @@ class CarController extends Controller
      */
     public function store(Request $request)
     {
-        $car = Car::create($request->all);
+        $car = Car::create($request->all());
         return response([ 'data' => CarResource::collection($car), 'success' => 'true'], 200);
     }
 
@@ -68,6 +68,6 @@ class CarController extends Controller
     public function destroy($id)
     {
         $car = Car::destroy($id);
-        return response([ 'data' => CarResource::collection($car), 'success' => 'true'], 200);
+        return $car;
     }
 }
