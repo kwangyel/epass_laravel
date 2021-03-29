@@ -56,7 +56,7 @@ class AgencyController extends Controller
         $agency = Agency::find($id);
         $agency->update($request->all());
 
-        return response([ 'data' => AgencyResource::collection($agency), 'success' => 'true'], 200);
+        return $agency;
     }
 
     /**
