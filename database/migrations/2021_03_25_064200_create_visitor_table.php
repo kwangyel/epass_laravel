@@ -17,7 +17,7 @@ class CreateVisitorTable extends Migration
                 $table->increments('id');
                 $table->dateTime('requesttime');
                 $table->integer('staff_id')->unsigned()->nullable();
-                $table->foreign('staff_id')->references('id')->on('staff')->onDelete('restrict');
+                $table->foreign('staff_id')->references('id')->on('staffs')->onDelete('restrict');
                 $table->string('name');
                 $table->string('agency');
                 $table->string('cid');

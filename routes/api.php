@@ -34,6 +34,10 @@ Route::resource('/car' , 'CarController');
 
 Route::resource('/staff' , 'StaffController');
 
+Route::resource('/gpass' , 'GatepassController');
+
+Route::resource('/gitem' , 'GateitemController');
+
 Route::resource('/visitor' , 'VisitorController');
 
 Route::get('/visitorbydate' , 'VisitorController@showbydate');
