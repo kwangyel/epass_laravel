@@ -71,4 +71,10 @@ class AgencyController extends Controller
         return $agency;
     }
 
+    public function agencycount()
+    {
+        $count = Agency::count();
+        return $count;
+    }
+
 }

@@ -9,7 +9,7 @@ use App\Staff;
 
 class Check extends Model
 {
-    protected $fillable =['time', 'staff_id','visitor_id','car_id','contact', 'type',];
+    protected $fillable =['time', 'staff_id','visitor_id','car_id','contact', 'type'];
 
     public function staff(){
 
