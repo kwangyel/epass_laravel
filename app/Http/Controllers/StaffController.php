@@ -87,4 +87,12 @@ class StaffController extends Controller
         return response([ 'data' => StaffResource::collection($staff), 'success' => 'true'], 200);
     }
 
+
+    public function staffcount()
+    {
+        $count = Staff::count();
+        return $count;
+    }
+
+
 }

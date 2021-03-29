@@ -81,5 +81,13 @@ class VisitorController extends Controller
         return response([ 'data' => VisitorResource::collection($visitor), 'success' => 'true'], 200);
     }
 
+
+    public function visitorcount()
+    {
+        $count = Visitor::count();
+        return $count;
+    }
+
+
 }
 

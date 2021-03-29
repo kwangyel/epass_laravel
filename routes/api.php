@@ -30,8 +30,6 @@ Route::post('/login','AuthController@login');
 
 Route::resource('/agency' , 'AgencyController');
 
-Route::get('/agency/count' , 'AgencyController@agencycount');
-
 Route::resource('/car' , 'CarController');
 
 Route::resource('/staff' , 'StaffController');
@@ -47,6 +45,14 @@ Route::get('/visitorbydate' , 'VisitorController@showbydate');
 Route::get('/checkbydate' , 'CheckController@showbydate');
 
 Route::resource('/check' , 'CheckController');
+
+Route::get('/checkcount' , 'CheckController@checkcount');
+
+Route::get('/agencycount' , 'AgencyController@agencycount');
+
+Route::get('/staffcount' , 'StaffController@staffcount');
+
+Route::get('/visitorcount' , 'VisitorController@visitorcount');
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();

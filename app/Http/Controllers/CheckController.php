@@ -6,6 +6,9 @@ use App\Check;
 use App\Http\Resources\CheckResource;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use App\Car;
+use App\Visitor;
+use App\Staff;
 
 class CheckController extends Controller
 {
@@ -142,5 +145,12 @@ class CheckController extends Controller
         $check = Check::with('staff', 'visitor' , 'car')->whereDate('time', Carbon::today())->get();
 
         return response([ 'data' => CheckResource::collection($check), 'success' => 'true'], 200);
+    }
+
+
+    public function checkcount()
+    {
+        $count = Check::count();
+        return $count;
     }
 }
