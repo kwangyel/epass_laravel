@@ -28,7 +28,7 @@ class CarController extends Controller
     public function store(Request $request)
     {
         $car = Car::create($request->all());
-        return response([ 'data' => CarResource::collection($car), 'success' => 'true'], 200);
+        return  $car;
     }
 
     /**
@@ -54,9 +54,9 @@ class CarController extends Controller
     public function update(Request $request, $id)
     {
         $car = Car::find($id);
-        $car->update($request->all());
-
-        return response([ 'data' => CarResource::collection($car), 'success' => 'true'], 200);
+        $data = $request->all();
+        $car->update($data);
+        return response()->json($car,200);
     }
 
     /**

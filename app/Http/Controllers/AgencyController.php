@@ -28,7 +28,7 @@ class AgencyController extends Controller
     public function store(Request $request)
     {
         $agency = Agency::create($request->all());
-        return response([ 'data' => AgencyResource::collection($agency), 'success' => 'true'], 200);
+        return  $agency;
     }
 
     /**
@@ -54,9 +54,9 @@ class AgencyController extends Controller
     public function update(Request $request, $id)
     {
         $agency = Agency::find($id);
-        $agency->update($request->all());
-
-        return $agency;
+        $data = $request->all();
+        $agency->update($data);
+        return response()->json($agency,200);
     }
 
     /**
@@ -68,6 +68,7 @@ class AgencyController extends Controller
     public function destroy($id)
     {
         $agency = Agency::destroy($id);
-        return response([ 'data' => AgencyResource::collection($agency), 'success' => 'true'], 200);
+        return $agency;
     }
+
 }

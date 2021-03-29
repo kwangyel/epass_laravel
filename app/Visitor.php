@@ -7,13 +7,17 @@ use App\Staff;
 
 class Visitor extends Model
 {
-    protected $fillable =['name','staff_id','agency','name', 'cid','address', 'contact','status',];
+    protected $fillable =['arrivaltime','staff_id','agency','name', 'cid','address', 'contact','status'];
 
 
     public function staff(){
 
-        return $this->belongsTo(Staff::class,'staff_id');
+        return $this->belongsTo(Staff::class);
     }
 
-    
+    public function agency(){
+
+        return $this->belongsTo(Staff::class);
+    }
+  
 }
