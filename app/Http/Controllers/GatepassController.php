@@ -75,4 +75,29 @@ class GatepassController extends Controller
         $item = Gatepass::destroy($id);
         return response()->json($item,200);
     }
+
+    public function statusupdate(Request $request, $id){
+
+
+            $data =array(
+                'status' => 'issued',
+            );
+            $gitem = Gatepass::where('id',$id);
+            $result = $gitem->update($data);
+            return response()->json($result,200);
+        
+    }
+
+    public function issueditem(){
+
+
+        $item = Gatepass::where('status', 'issued')->get();
+        return response()->json($item,200);
+    }
+
+    public function listeditem(){
+
+    $item = Gatepass::where('status', 'listed')->get();
+    return response()->json($item,200);
+    }
 }
