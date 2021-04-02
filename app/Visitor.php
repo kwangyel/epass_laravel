@@ -18,6 +18,5 @@ class Visitor extends Model
     public function agency(){
 
         return $this->belongsTo(Staff::class);
-    }
-  
+    } 
 }

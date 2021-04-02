@@ -16,7 +16,7 @@ class GatepassController extends Controller
      */
     public function index()
     {
-        $item = Gatepass::all();
+        $item = Gatepass::with('staff')->get();
         return response()->json($item,200);
     }
 

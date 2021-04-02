@@ -42,17 +42,25 @@ Route::resource('/visitor' , 'VisitorController');
 
 Route::get('/visitorbydate' , 'VisitorController@showbydate');
 
-Route::get('/checkbydate' , 'CheckController@showbydate');
+Route::get('/checkstaffs' , 'CheckController@showstaff');
+
+Route::get('/checkvisitors' , 'CheckController@showvisitor');
+
+Route::get('/checkcars' , 'CheckController@showcar');
 
 Route::resource('/check' , 'CheckController');
 
-Route::get('/checkcount' , 'CheckController@checkcount');
+Route::get('/checkcount' , 'CheckController@checkcount'); /// todays count
 
 Route::get('/agencycount' , 'AgencyController@agencycount');
 
 Route::get('/staffcount' , 'StaffController@staffcount');
 
 Route::get('/visitorcount' , 'VisitorController@visitorcount');
+
+Route::get('/getdriver' , 'StaffController@showbyrole');
+
+
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();

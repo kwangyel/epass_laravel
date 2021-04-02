@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Agency;
 
 class Car extends Model
 {
@@ -13,4 +14,10 @@ class Car extends Model
 
         return $this->belongsTo(Agency::class,'agency_id');
     }
+
+    public function staff(){
+
+        return $this->belongsTo(Staff::class);
+    }
+
 }

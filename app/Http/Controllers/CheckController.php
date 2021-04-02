@@ -19,8 +19,8 @@ class CheckController extends Controller
      */
     public function index()
     {
-        $check = Check::with('staff','car', 'visitor')->get();
-
+        
+        $check = Check::with('staff','visitor', 'car')->paginate(5);
         return response([ 'data' => CheckResource::collection($check), 'success' => 'true'], 200);
     }
 
@@ -59,7 +59,7 @@ class CheckController extends Controller
                 return response()->json($result,200);
             }
 
-        }elseif($staff_id !== null){
+        }elseif($staff_id !== null && $car_id == null){
 
             $type = $request->get('type');
 
@@ -140,17 +140,38 @@ class CheckController extends Controller
        
     }
 
-    public function showbydate()
-    {
-        $check = Check::with('staff', 'visitor' , 'car')->whereDate('time', Carbon::today())->get();
+    /**
+     *
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
 
-        return response([ 'data' => CheckResource::collection($check), 'success' => 'true'], 200);
+    public function showstaff()
+    {
+       
+         $staffcheck = Check::where('staff_id','!=', null)->with('staff.agency')->whereDate('time', Carbon::today())->paginate(5);
+         return collect($staffcheck);
+
+        
+    }
+
+    public function showvisitor()
+    {
+        $visitorcheck = Check::where('visitor_id','!=', null)->with('visitor.staff.agency')->whereDate('time', Carbon::today())->paginate(5);
+         return collect($visitorcheck);
+    }
+
+    public function showcar()
+    {
+        $carcheck = Check::where('car_id','!=', null)->with('car.agency', 'staff')->whereDate('time', Carbon::today())->paginate(5);
+         return collect($carcheck);
     }
 
 
     public function checkcount()
     {
-        $count = Check::count();
+        $count = Check::whereDate('time', Carbon::today())->count();
         return $count;
     }
 }

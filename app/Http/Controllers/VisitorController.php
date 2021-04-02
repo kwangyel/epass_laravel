@@ -76,7 +76,7 @@ class VisitorController extends Controller
 
     public function showbydate()
     {
-        $visitor = Visitor::whereDate('arrivedtime', Carbon::today())->get();
+        $visitor = Visitor::whereDate('arrivaltime', Carbon::today())->get();
 
         return response([ 'data' => VisitorResource::collection($visitor), 'success' => 'true'], 200);
     }
@@ -84,7 +84,7 @@ class VisitorController extends Controller
 
     public function visitorcount()
     {
-        $count = Visitor::count();
+        $count = Visitor::whereDate('arrivaltime', Carbon::today())->count();
         return $count;
     }
 

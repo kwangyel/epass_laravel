@@ -76,14 +76,13 @@ class StaffController extends Controller
     public function agency(Staff $agency_id)
     {
         $staff = Staff::all()->where('agency_id', $agency_id);
-        return response([ 'data' => StaffResource::collection($staff), 'success' => 'true'], 200);
+        return response()->json($staff,200);
     }
 
     
     public function showbyrole()
     {
-        $staff = Staff::all()->where('role', 'driver');
-
+        $staff = Staff::all()->where('role','driver');
         return response([ 'data' => StaffResource::collection($staff), 'success' => 'true'], 200);
     }
 

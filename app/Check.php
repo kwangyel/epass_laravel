@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Car;
 use App\Visitor;
 use App\Staff;
+use App\Agency;
 
 class Check extends Model
 {
@@ -25,4 +26,6 @@ class Check extends Model
 
         return $this->belongsTo(Visitor::class,'visitor_id');
     }
+
+    
 }
