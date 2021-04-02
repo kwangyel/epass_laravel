@@ -18,6 +18,7 @@ class CreateGateitemsTable extends Migration
             $table->integer('gid')->unsigned()->nullable();
             $table->foreign('gid')->references('id')->on('gatepasses')->onDelete('cascade');
             $table->string('name')->nullable();
+            $table->double('quantity')->nullable();
             $table->boolean('returnable')->nullable();
             $table->string('status')->nullable();
             $table->timestamps();

@@ -16,8 +16,10 @@ class CreateGatepassesTable extends Migration
         Schema::create('gatepasses', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('staff_id')->unsigned()->nullable();
-            $table->foreign('staff_id')->references('id')->on('staffs')->onDelete('cascade');
+            $table->foreign('staff_id')->references('id')->on('staff')->onDelete('cascade');
             $table->string('agency')->nullable();
+            $table->dateTime('issue_date')->nullable();
+            $table->string('status')->nullable();
             $table->string('purpose')->nullable();
             $table->timestamps();
         });
