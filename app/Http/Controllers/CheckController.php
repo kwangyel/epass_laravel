@@ -20,7 +20,7 @@ class CheckController extends Controller
     public function index()
     {
         
-        $check = Check::with('staff','visitor', 'car')->paginate(5);
+        $check = Check::with('staff','visitor', 'car')->paginate(20);
         return response([ 'data' => CheckResource::collection($check), 'success' => 'true'], 200);
     }
 
@@ -122,7 +122,7 @@ class CheckController extends Controller
     public function showstaff()
     {
        
-         $staffcheck = Check::where('staff_id','!=', null)->with('staff.agency')->whereDate('time', Carbon::today())->paginate(5);
+         $staffcheck = Check::where('staff_id','!=', null)->with('staff.agency')->whereDate('time', Carbon::today())->paginate(20);
          return collect($staffcheck);
 
         
@@ -130,13 +130,13 @@ class CheckController extends Controller
 
     public function showvisitor()
     {
-        $visitorcheck = Check::where('visitor_id','!=', null)->with('visitor.staff.agency')->whereDate('time', Carbon::today())->paginate(5);
+        $visitorcheck = Check::where('visitor_id','!=', null)->with('visitor.staff.agency')->whereDate('time', Carbon::today())->paginate(20);
          return collect($visitorcheck);
     }
 
     public function showcar()
     {
-        $carcheck = Check::where('car_id','!=', null)->with('car.agency', 'staff')->whereDate('time', Carbon::today())->paginate(5);
+        $carcheck = Check::where('car_id','!=', null)->with('car.agency', 'staff')->whereDate('time', Carbon::today())->paginate(20);
          return collect($carcheck);
     }
 
