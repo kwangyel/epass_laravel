@@ -24,7 +24,7 @@ class CreateVisitorTable extends Migration
                 $table->string('address');
                 $table->string('contact');
                 $table->string('status')->default('check-in');
-                $table->dateTime('arrivedtime');
+                $table->dateTime('arrivaltime');
                 $table->timestamps();
            
         });
