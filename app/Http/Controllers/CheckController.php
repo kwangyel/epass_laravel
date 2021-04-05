@@ -41,66 +41,38 @@ class CheckController extends Controller
 
             $type = $request->get('type');
 
-            if ($type === 'checked-in'){
-                $data = array(
-                    'status' => 'checked-in',
-                );
-                $visitor = Visitor::where('id',$request->get('visitor_id'));
-                $result = $visitor->update($data);
-                return response()->json($result,200);
-            }
-            else
-            {
+
                 $data =array(
-                    'status' => 'checked-out',
+                    'status' => $type,
                 );
                 $visitor = Visitor::where('id',$request->get('visitor_id'));
                 $result = $visitor->update($data);
                 return response()->json($result,200);
-            }
+            
 
         }elseif($staff_id !== null && $car_id == null){
 
             $type = $request->get('type');
 
-            if ($type === 'checked-in'){
-                $data = array(
-                    'status' => 'checked-in',
-                );
-                $staff = Staff::where('id',$request->get('staff_id'));
-                $result = $staff->update($data);
-                return response()->json($result,200);
-            }
-            else
-            {
+    
                 $data =array(
-                    'status' => 'checked-out',
+                    'status' => $type,
                 );
                 $staff = Staff::where('id',$request->get('staff_id'));
                 $result = $staff->update($data);
                 return response()->json($result,200);
-            }
+            
         }elseif($car_id !== null) {
 
             $type = $request->get('type');
 
-            if ($type === 'checked-in'){
-                $data = array(
-                    'status' => 'checked-in',
-                );
-                $car = Car::where('id',$request->get('car_id'));
-                $result = $car->update($data);
-                return response()->json($result,200);
-            }
-            else
-            {
+        
                 $data =array(
-                    'status' => 'checked-out',
+                    'status' => $type,
                 );
                 $car = Car::where('id',$request->get('car_id'));
                 $result = $car->update($data);
-                return response()->json($result,200);
-            }
+                return response()->json($result,200);  
         }  
         
     }

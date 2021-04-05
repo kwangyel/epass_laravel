@@ -77,11 +77,13 @@ class GatepassController extends Controller
     }
 
     public function statusupdate(Request $request, $id){
-
+        
+        $type = $request->get('status');
 
             $data =array(
-                'status' => 'issued',
+                'status' => $type,
             );
+
             $gitem = Gatepass::where('id',$id);
             $result = $gitem->update($data);
             return response()->json($result,200);
@@ -91,13 +93,14 @@ class GatepassController extends Controller
     public function issueditem(){
 
 
-        $item = Gatepass::where('status', 'issued')->get();
+        $item = Gatepass::with('staff', 'staff.agency')->where('status', 'issued')->get();
         return response()->json($item,200);
     }
 
     public function listeditem(){
 
-    $item = Gatepass::where('status', 'listed')->get();
+    $item = Gatepass::with('staff', 'staff.agency')->where('status', 'listed')->get();
     return response()->json($item,200);
     }
+    
 }
