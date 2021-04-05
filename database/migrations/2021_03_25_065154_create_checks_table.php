@@ -15,7 +15,7 @@ class CreateChecksTable extends Migration
     {
         Schema::create('checks', function (Blueprint $table) {
             $table->increments('id');
-            $table->dateTime('time');
+            $table->dateTime('time')->nullable();
             $table->integer('staff_id')->unsigned()->nullable();
             $table->foreign('staff_id')->references('id')->on('staff')->onDelete('restrict');
             $table->integer('visitor_id')->unsigned()->nullable();
