@@ -40,6 +40,8 @@ Route::resource('/gitem' , 'GateitemController');
 
 Route::put('/gpass/status/{id}' , 'GatepassController@statusupdate');
 
+Route::put('/gitem/status/{id}' , 'GateitemController@statusupdate');
+
 Route::get('/gpass/status/issued' , 'GatepassController@issueditem');
 
 Route::get('/gpass/status/listed' , 'GatepassController@listeditem');

@@ -68,4 +68,19 @@ class GateitemController extends Controller
         $item = Gateitem::destroy($id);
         return response()->json($item,200);
     }
+
+
+    public function statusupdate(Request $request, $id){
+        
+        $type = $request->get('status');
+
+            $data =array(
+                'status' => $type,
+            );
+
+            $gitem = Gateitem::where('id',$id);
+            $result = $gitem->update($data);
+            return response()->json($result,200);
+        
+    }
 }
