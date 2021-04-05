@@ -38,6 +38,12 @@ Route::resource('/gpass' , 'GatepassController');
 
 Route::resource('/gitem' , 'GateitemController');
 
+Route::put('/gpass/status/{id}' , 'GatepassController@statusupdate');
+
+Route::get('/gpass/status/issued' , 'GatepassController@issueditem');
+
+Route::get('/gpass/status/listed' , 'GatepassController@listeditem');
+
 Route::resource('/visitor' , 'VisitorController');
 
 Route::get('/visitorbydate' , 'VisitorController@showbydate');
