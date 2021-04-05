@@ -15,7 +15,6 @@ class CreateVisitorTable extends Migration
     {
         Schema::create('visitors', function (Blueprint $table) {
                 $table->increments('id');
-                $table->dateTime('requesttime');
                 $table->integer('staff_id')->unsigned()->nullable();
                 $table->foreign('staff_id')->references('id')->on('staff')->onDelete('restrict');
                 $table->string('name');
